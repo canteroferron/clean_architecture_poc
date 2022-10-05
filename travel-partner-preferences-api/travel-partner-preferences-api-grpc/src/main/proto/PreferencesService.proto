@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package es.indra.travel.partner.preferences.api.grpc;
+
+message PreferencesRequest {
+    string userId = 1;
+    string description = 2;
+}
+
+message PreferencesResponse {
+    string userId = 1;
+    string description = 2;
+}
+
+message PreferencesDeleteRequest {
+    string userId = 1;
+}
+
+service PreferencesService {
+    rpc addPreferences(PreferencesRequest) returns (PreferencesResponse);
+    rpc updatePreferences(PreferencesRequest) returns (PreferencesResponse);
+    rpc deletePreferences(PreferencesDeleteRequest) returns (PreferencesResponse);
+}

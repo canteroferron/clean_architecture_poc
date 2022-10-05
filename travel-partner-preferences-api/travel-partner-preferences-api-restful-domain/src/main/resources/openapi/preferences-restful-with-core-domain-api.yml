@@ -1,0 +1,118 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Travel Companion Domain
+  license:
+    name: MIT
+
+
+tags:
+  - name: preferences
+    description: Everything about preferences with domain
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  /preferences:
+    post:
+      tags:
+        - preferences
+      summary: Add a new prefernces
+      description: Add a new preferences
+      operationId: addPreferences
+      requestBody:
+        description: Create a new preferences in store
+        content:
+          application/json:
+            schema:
+              $ref: '../../../../target/resources/openapi/travel-partner-preferences-core-domain.yml#/components/schemas/Preferences'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '../../../../target/resources/openapi/travel-partner-preferences-core-domain.yml#/components/schemas/Preferences'          
+        '405':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'    
+    put:
+      tags:
+        - preferences
+      summary: Update an existing preferences
+      description: Update an existing references by user id
+      operationId: updatePreferences
+      requestBody:
+        description: Update an existent preferences in store
+        content:
+          application/json:
+            schema:
+              $ref: '../../../../target/resources/openapi/travel-partner-preferences-core-domain.yml#/components/schemas/Preferences'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '../../../../target/resources/openapi/travel-partner-preferences-core-domain.yml#/components/schemas/Preferences'          
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto' 
+        '404':
+          description: User id not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '405':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          
+  /preferences/{userId}:
+    delete:
+      tags:
+        - preferences
+      summary: Deletes a preferences by suer id
+      description: delete a preferences of the store by user id
+      operationId: deletePreferences
+      parameters:
+        - name: userId
+          in: path
+          description: user id to delete preferences
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid pet value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+    
+
+components:
+  schemas:
+          
+    ErrorDto:
+      type: object
+      additionalProperties: false
+      description: >-
+        Common error.
+      properties:
+        code:
+          type: string
+        description:
+          type: string

@@ -1,0 +1,24 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Travel Companion Domain
+  license:
+    name: MIT
+
+paths: {}
+
+components:
+  schemas:
+    Preferences:
+      type: object
+      additionalProperties: false
+      description: >-
+        Preference by user.
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+        description:
+          type: string
+      
